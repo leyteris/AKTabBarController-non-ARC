@@ -49,9 +49,15 @@
     {
         [_contentView removeFromSuperview];
         _contentView = [contentView retain];
-        _contentView.frame = CGRectZero;
+        CGFloat containerViewHeight = CGRectGetHeight(self.bounds);
+		containerViewHeight -= CGRectGetHeight(_tabBar.bounds);
+		_contentView.frame = CGRectMake(CGRectGetMinX(self.bounds),
+                                                       CGRectGetMinY(self.bounds),
+                                                       CGRectGetWidth(self.bounds),
+                                                       containerViewHeight);
         [self addSubview:_contentView];
         [self sendSubviewToBack:_contentView];
+        [_contentView setNeedsLayout];
     }
 }
 

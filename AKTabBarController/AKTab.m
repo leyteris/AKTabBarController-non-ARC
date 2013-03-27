@@ -121,7 +121,7 @@ static const float kTopMargin = 2.0;
     container.size.height -= kTopMargin;
     container.origin.y += kTopMargin;
     
-    UIImage *image;
+    UIImage *image = nil;
     CGRect imageRect = CGRectZero;
     CGFloat ratio = 0;
     

@@ -313,9 +313,12 @@ typedef enum {
 			[previousSelectedViewController viewWillDisappear:NO];
 			[selectedViewController viewWillAppear:NO];
 		}
-        
         [tabBarView setContentView:selectedViewController.view];
-        
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 5.0) {
+            if([selectedViewController respondsToSelector:@selector(viewDidLayoutSubviews)]) {
+                [selectedViewController performSelector:@selector(viewDidLayoutSubviews)];
+            }
+        }
         if ((self.childViewControllers == nil || !self.childViewControllers.count) && visible) {
 			[previousSelectedViewController viewDidDisappear:NO];
 			[selectedViewController viewDidAppear:NO];
