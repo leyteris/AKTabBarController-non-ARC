@@ -76,6 +76,8 @@ typedef enum {
     self.selectedBackgroundImageName = nil;
     self.textColor = nil;
     self.selectedTextColor = nil;
+    self.selectedViewController = nil;
+    self.prevViewControllers = nil;
     
     [tabBar release];
     tabBar = nil;
@@ -299,14 +301,16 @@ typedef enum {
     _viewControllers = [viewControllers retain];
     
     // When setting the view controllers, the first vc is the selected one;
-    [self setSelectedViewController:[viewControllers objectAtIndex:0]];
+    if(_viewControllers != nil && _viewControllers.count != 0) {
+        [self setSelectedViewController:[_viewControllers objectAtIndex:0]];
+    }
 }
 
 - (void)setSelectedViewController:(UIViewController *)selectedViewController
 {
     UIViewController *previousSelectedViewController = selectedViewController;
     if (_selectedViewController != selectedViewController) {
-        
+        [_selectedViewController autorelease];
         _selectedViewController = [selectedViewController retain];
         
         if ((self.childViewControllers == nil || !self.childViewControllers.count) && visible) {

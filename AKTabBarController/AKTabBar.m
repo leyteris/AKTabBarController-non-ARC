@@ -62,7 +62,7 @@ static int kTopEdgeWidth   = 1;
         for (AKTab *tab in _tabs) {
             [tab removeFromSuperview];
         }
-        
+        [_tabs autorelease];
         _tabs = [array retain];
         
         for (AKTab *tab in _tabs) {
@@ -77,6 +77,7 @@ static int kTopEdgeWidth   = 1;
 {
     if (selectedTab != _selectedTab) {
         [_selectedTab setSelected:NO];
+        [_selectedTab autorelease];
         _selectedTab = [selectedTab retain];
         [_selectedTab setSelected:YES];
     }
